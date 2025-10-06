@@ -1,20 +1,27 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 const CartContext = createContext();
+const CART_STORAGE_KEY = 'v_ecom_cart_mern';
 
-const initialState = {
-  cartItems: [],
+const loadInitialState = () => {
+  try {
+    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+    return storedCart ? { cartItems: JSON.parse(storedCart) } : { cartItems: [] };
+  } catch (error) {
+    console.error("Failed to load cart from localStorage", error);
+    return { cartItems: [] };
+  }
 };
 
 const cartReducer = (state, action) => {
+  let newState;
   switch (action.type) {
     case "ADD_TO_CART":
       const existingItem = state.cartItems.find(
         (item) => item.id === action.payload.id
       );
       if (existingItem) {
-        // increase quantity if product already exists
-        return {
+        newState = {
           ...state,
           cartItems: state.cartItems.map((item) =>
             item.id === action.payload.id
@@ -22,20 +29,23 @@ const cartReducer = (state, action) => {
               : item
           ),
         };
+      } else {
+        newState = {
+          ...state,
+          cartItems: [...state.cartItems, { ...action.payload, quantity: 1 }],
+        };
       }
-      return {
-        ...state,
-        cartItems: [...state.cartItems, { ...action.payload, quantity: 1 }],
-      };
+      break;
 
     case "REMOVE_FROM_CART":
-      return {
+      newState = {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
       };
+      break;
 
     case "INCREASE_QUANTITY":
-      return {
+      newState = {
         ...state,
         cartItems: state.cartItems.map((item) =>
           item.id === action.payload
@@ -43,9 +53,10 @@ const cartReducer = (state, action) => {
             : item
         ),
       };
+      break;
 
     case "DECREASE_QUANTITY":
-      return {
+      newState = {
         ...state,
         cartItems: state.cartItems
           .map((item) =>
@@ -53,19 +64,29 @@ const cartReducer = (state, action) => {
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )
-          .filter((item) => item.quantity > 0), // remove if quantity goes 0
+          .filter((item) => item.quantity > 0),
       };
+      break;
 
     case "CLEAR_CART":
-      return { ...state, cartItems: [] };
+      newState = { ...state, cartItems: [] };
+      break;
 
     default:
       return state;
   }
+  
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(newState.cartItems));
+  } catch (error) {
+    console.error("Failed to save cart to localStorage", error);
+  }
+
+  return newState;
 };
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const [state, dispatch] = useReducer(cartReducer, {}, loadInitialState);
 
   const addToCart = (product) => {
     dispatch({ type: "ADD_TO_CART", payload: product });

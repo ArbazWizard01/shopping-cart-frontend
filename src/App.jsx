@@ -3,18 +3,29 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import { CartProvider } from "./context/CartContext";
+import { FiShoppingCart } from 'react-icons/fi';
 import "./App.css";
 
+
+const gradientBrandStyle = {
+    fontSize: '1.8rem',
+    fontWeight: '900',
+    textDecoration: 'none',
+    backgroundImage: 'linear-gradient(90deg, #1a5ca5 0%, #2A73C2 50%, #4a8ed0 100%)',
+    color: 'transparent',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    transition: 'all 0.2s ease',
+};
 function App() {
   return (
     <CartProvider>
       <Router>
         <nav className="navbar">
-<<<<<<< HEAD
-=======
-          <Link to="/">Products</Link>
->>>>>>> 7f07aba2a71d571ae8eb240ad8b0f6f0d1df480f
-          <Link to="/cart">Cart</Link>
+          <Link to="/" style={gradientBrandStyle}>
+              VERTO
+          </Link>
+          <Link to="/cart"><FiShoppingCart/></Link>
         </nav>
 
         <Routes>
