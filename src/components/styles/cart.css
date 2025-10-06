@@ -1,12 +1,11 @@
 .cart-container {
     padding: 30px 20px;
-    max-width: 800px; /* Smaller max-width than products for focus */
+    max-width: 800px;
     margin: 0 auto;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
-
 .cart-container h2 {
     font-family: 'Poppins', sans-serif;
     font-size: 2rem;
@@ -25,9 +24,6 @@
     padding: 30px 0;
 }
 
-/* ---------------------------------- */
-/* 2. Cart Item List */
-/* ---------------------------------- */
 
 .cart-container ul {
     list-style: none;
@@ -45,28 +41,21 @@
     font-size: 1rem;
     color: #333333;
 }
-
-/* Last item has no border */
 .cart-container li:last-child {
     border-bottom: none;
 }
 
-/* ---------------------------------- */
-/* 3. Quantity Controls and Remove Button */
-/* ---------------------------------- */
 
 .quantity-controls {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between buttons */
+    gap: 10px; /
 }
-
-/* Quantity increase/decrease buttons */
 .quantity-controls button:nth-child(1),
 .quantity-controls button:nth-child(2) {
     width: 30px;
     height: 30px;
-    background-color: #2A73C2; /* Primary Blue */
+    background-color: #2A73C2;
     color: white;
     border: none;
     border-radius: 4px;
@@ -79,11 +68,9 @@
 .quantity-controls button:nth-child(2):hover {
     background-color: #1a5ca5;
 }
-
-/* Remove button */
 .quantity-controls button:nth-child(3) {
     background-color: transparent;
-    color: #CC0000; /* Red for deletion */
+    color: #CC0000;
     border: 1px solid #CC0000;
     padding: 5px 10px;
     border-radius: 4px;
@@ -97,9 +84,6 @@
     color: white;
 }
 
-/* ---------------------------------- */
-/* 4. Total and Checkout Button */
-/* ---------------------------------- */
 
 .cart-container h3 {
     font-family: 'Poppins', sans-serif;
@@ -109,14 +93,14 @@
     color: #333333;
     padding: 20px 0;
     margin-top: 10px;
-    border-top: 2px solid #333333; /* Strong line above total */
+    border-top: 2px solid #333333; 
 }
 
-.cart-container > div > button { /* Targets the main Checkout button */
+.cart-container > div > button {
     width: 100%;
     padding: 15px;
     margin-top: 20px;
-    background-color: #4CAF50; /* Accent Green for Confirmation/Checkout */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     border-radius: 8px;
@@ -132,9 +116,6 @@
     background-color: #45a049;
 }
 
-/* ---------------------------------- */
-/* 5. Checkout Message */
-/* ---------------------------------- */
 
 .cart-container > p:last-child {
     margin-top: 20px;
@@ -142,13 +123,11 @@
     border-radius: 8px;
     font-weight: 600;
     text-align: center;
-    /* Styles are dynamically set based on success/fail */
-    background-color: #E8F5E9; /* Light green for success */
+    background-color: #E8F5E9; 
     color: #4CAF50;
     border: 1px solid #4CAF50;
 }
 
-/* Mobile adjustments */
 @media (max-width: 600px) {
     .cart-container li {
         flex-direction: column;
@@ -156,6 +135,6 @@
         gap: 10px;
     }
     .quantity-controls {
-        align-self: flex-end; /* Push controls to the right on mobile */
+        align-self: flex-end;
     }
 }
