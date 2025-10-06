@@ -1,0 +1,128 @@
+/* ---------------------------------- */
+/* 1. Global Imports and Container */
+/* ---------------------------------- */
+
+/* Assuming you include font links in your index.html or App.css */
+/* Fonts: 'Poppins' for headers, 'Roboto' for body text */
+
+.products-container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.products-container h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    color: #333333;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Style for the simple loading indicator */
+.products-container > p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #2A73C2; /* Primary Blue */
+    padding: 50px 0;
+}
+
+
+/* ---------------------------------- */
+/* 2. Product Grid Layout */
+/* ---------------------------------- */
+
+.product-list {
+    display: grid;
+    /* Responsive Grid Setup */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Spacing between cards */
+}
+
+/* ---------------------------------- */
+/* 3. Individual Product Card (.product-card) */
+/* ---------------------------------- */
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 12px; /* Smooth rounded corners */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for lift */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #f0f0f0;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Card Image --- */
+.product-card img {
+    width: 100%;
+    height: 200px; /* Consistent height for all images */
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* --- Card Content Area --- */
+.product-card > * {
+    /* Apply consistent padding to all direct children of the card (h3, p, button) */
+    padding: 0 20px;
+}
+.product-card h3, .product-card p {
+    margin-bottom: 0;
+}
+
+/* --- Product Name --- */
+.product-card h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    color: #333333;
+    font-weight: 600;
+    margin-top: 20px;
+    min-height: 2.8rem; /* Reserve space for two lines */
+    line-height: 1.4;
+}
+
+/* --- Product Price --- */
+.product-card p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2A73C2; /* Primary Brand Color */
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+/* --- Add to Cart Button --- */
+.product-card button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2A73C2; /* Primary Brand Color */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Slightly rounded button */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    margin-top: auto; /* Push button to the bottom */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(42, 115, 194, 0.3);
+}
+
+.product-card button:hover {
+    background-color: #1a5ca5; /* Darker blue on hover */
+    box-shadow: 0 4px 10px rgba(42, 115, 194, 0.4);
+}
+
+.product-card button:active {
+    background-color: #124075;
+}

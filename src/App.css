@@ -1,0 +1,73 @@
+/* ---------------------------------- */
+/* 1. Font Imports */
+/* ---------------------------------- */
+/* Importing Poppins for headers/accents and Roboto for body text */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;700&display=swap');
+
+/* ---------------------------------- */
+/* 2. Global Resets and Body Styles */
+/* ---------------------------------- */
+* {
+    /* Standard box model setup */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Off-white background for a clean, soft look */
+    background-color: #F8F8F8; 
+    /* Default font for the application */
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure main content starts below the fixed navbar */
+#root {
+    padding-top: 70px; /* Space equal to the navbar height */
+}
+
+
+/* ---------------------------------- */
+/* 3. Navigation Bar Styling */
+/* ---------------------------------- */
+.navbar {
+    background-color: #ffffff; /* Pure white background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: fixed; /* Keeps the navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Pushes content to the right */
+    padding: 0 40px;
+    z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+/* Style for the Cart Link/Icon area */
+.navbar a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2A73C2; /* Primary Brand Color (Blue) */
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: #f0f4f8; /* Very light blue background on hover */
+    color: #1a5ca5;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0 20px;
+    }
+}

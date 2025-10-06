@@ -1,0 +1,161 @@
+.cart-container {
+    padding: 30px 20px;
+    max-width: 800px; /* Smaller max-width than products for focus */
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+}
+
+.cart-container h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #333333;
+    margin-bottom: 25px;
+    font-weight: 700;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.cart-container > p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #666666;
+    padding: 30px 0;
+}
+
+/* ---------------------------------- */
+/* 2. Cart Item List */
+/* ---------------------------------- */
+
+.cart-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.cart-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eeeeee;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #333333;
+}
+
+/* Last item has no border */
+.cart-container li:last-child {
+    border-bottom: none;
+}
+
+/* ---------------------------------- */
+/* 3. Quantity Controls and Remove Button */
+/* ---------------------------------- */
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Quantity increase/decrease buttons */
+.quantity-controls button:nth-child(1),
+.quantity-controls button:nth-child(2) {
+    width: 30px;
+    height: 30px;
+    background-color: #2A73C2; /* Primary Blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.quantity-controls button:nth-child(1):hover,
+.quantity-controls button:nth-child(2):hover {
+    background-color: #1a5ca5;
+}
+
+/* Remove button */
+.quantity-controls button:nth-child(3) {
+    background-color: transparent;
+    color: #CC0000; /* Red for deletion */
+    border: 1px solid #CC0000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.quantity-controls button:nth-child(3):hover {
+    background-color: #CC0000;
+    color: white;
+}
+
+/* ---------------------------------- */
+/* 4. Total and Checkout Button */
+/* ---------------------------------- */
+
+.cart-container h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: right;
+    color: #333333;
+    padding: 20px 0;
+    margin-top: 10px;
+    border-top: 2px solid #333333; /* Strong line above total */
+}
+
+.cart-container > div > button { /* Targets the main Checkout button */
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #4CAF50; /* Accent Green for Confirmation/Checkout */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+.cart-container > div > button:hover {
+    background-color: #45a049;
+}
+
+/* ---------------------------------- */
+/* 5. Checkout Message */
+/* ---------------------------------- */
+
+.cart-container > p:last-child {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    /* Styles are dynamically set based on success/fail */
+    background-color: #E8F5E9; /* Light green for success */
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .cart-container li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .quantity-controls {
+        align-self: flex-end; /* Push controls to the right on mobile */
+    }
+}
