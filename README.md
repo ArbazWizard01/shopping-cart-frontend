@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Verto — Shopping Cart Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend application for a modern e-commerce shopping cart demo, designed to showcase robust state management, persistence, and custom styling in a React environment. It is a single-page application that simulates product listing and checkout processes by communicating with a local REST API endpoint.
 
-## Available Scripts
+#### Backend repository: https://github.com/ArbazWizard01/shopping-cart-backend
 
-In the project directory, you can run:
+## Features 
 
-### `npm start`
+### Key Frontend Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  **Product Listing:** Fetches and displays a list of items from a simulated API.
+2.  **Cart Management (CRUD):** Implements core shopping cart functionalities: adding, increasing/decreasing quantity, and removing items.
+3.  **Client-Side Persistence:** Utilizes **`localStorage`** to save and restore the user's cart state across page reloads and sessions.
+4.  **Custom UI Controls:** Features a highly customized and interactive **`QuantitySelector`** component built with **`styled-components`** and modern icons (`react-icons/fi`).
+5.  **Checkout Simulation:** A `handleCheckout` function simulates a transaction via a `POST` request to the backend.
+6.  **Technology Stack:** Leverages **Axios** for API calls, **Ant Design (antd)** for basic layout and buttons, **`react-router-dom`** for navigation, and **`styled-components`** for component styling.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-----
 
-### `npm test`
+## Quick Start 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Requirements
 
-### `npm run build`
+Requires **Node.js** and **npm** (or yarn) installed.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation and Running
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Clone the repository
+git clone [repository-url] verto-shopping-cart.frontend
+cd verto-shopping-cart.frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Install dependencies
+npm install
 
-### `npm run eject`
+# Start the frontend development server
+npm run dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Open `http://localhost:5173` (or the port Vite prints in your terminal) in your browser.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-----
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Assumptions & Design Choices 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Below are the main assumptions and design choices made while building the cart functionality:
 
-## Learn More
+| Area | Choice | Rationale/Trade-off |
+| :--- | :--- | :--- |
+| **State Management** | **React Context** + **`useReducer`** | Provides a predictable, centralized state store for all cart operations, easily testable and scalable for this size application. |
+| **Data Persistence** | **`localStorage`** | Ideal for non-critical, client-side data like cart contents. Ensures data persists across tabs and browser restarts without requiring database access. |
+| **UI/Styling** | Ant Design + **`styled-components`** | AntD is fast for common elements, while `styled-components` allows for highly customized, unique components like the neumorphic `QuantitySelector`. |
+| **Data Fetching** | **Axios** (direct calls) | Simple, explicit control over requests for product listing and checkout simulation. |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-----
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Architecture and Data Flow 
 
-### Code Splitting
+  - **Global State:** The cart items array is managed within the **`CartContext`** using a `useReducer` hook.
+  - **Initial Load:** The `useReducer` is initialized using a function that attempts to parse the cart items from **`localStorage`**. If successful, the previously saved cart is restored; otherwise, it starts empty.
+  - **Data Flow:** Any cart action (e.g., `addToCart`) triggers a `dispatch` to the `cartReducer`.
+  - **Persistence Hook:** The `cartReducer` contains logic to **synchronously update `localStorage`** immediately after the state has been successfully updated, ensuring persistence on every modification.
+  - **Component Interaction:** `Products.jsx` and `Cart.jsx` consume the state and actions via the dedicated `useCart` custom hook, avoiding prop-drilling.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-----
 
-### Analyzing the Bundle Size
+## Project Structure (Important Files) :file\_folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Filepath | Responsibility |
+| :--- | :--- |
+| `src/context/CartContext.js` | **State Engine.** Defines the `cartReducer`, handles `localStorage` load/save logic, and exports the `CartProvider`. |
+| `src/components/Products.jsx` | **Product List.** Handles mock product fetching, renders product cards, and calls the `addToCart` action. |
+| `src/components/Cart.jsx` | **Cart View.** Renders cart items, integrates the custom styled **`QuantitySelector`**, calculates total, and simulates `handleCheckout`. |
+| `src/App.jsx` | **Root & Routing.** Sets up `react-router-dom` routes (`/`, `/cart`) and wraps the entire application with the `CartProvider`. |
 
-### Making a Progressive Web App
+-----
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Key Components and Responsibilities 
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - **`CartProvider` (`CartContext.js`):** The primary container responsible for handling all state transitions, enforcing business logic (quantity control), and synchronizing the entire cart data with `localStorage`.
+  - **`cartReducer` (`CartContext.js`):** A pure function that calculates the next state based on the current state and a dispatched action. It is the central authority for all cart data manipulation.
+  - **`QuantitySelector` (`Cart.jsx`):** A composition of `styled-components` that isolates the visual design and interactive logic for increasing and decreasing item quantity, providing a superior UI experience.
+  - **`useCart` (`CartContext.js`):** Custom hook that simplifies access to cart state (`cartItems`) and actions (`addToCart`, `increaseQuantity`, etc.) for any consuming component.
